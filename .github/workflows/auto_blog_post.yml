@@ -26,10 +26,14 @@ jobs:
         run: |
           python generate_post.py
 
-      - name: Commit new blog post
+      - name: Update homepage with latest blog posts
+        run: |
+          python update_homepage.py
+
+      - name: Commit new blog post and update homepage
         run: |
           git config --global user.name "GitHub Actions"
           git config --global user.email "actions@github.com"
           git add .
-          git commit -m "Automated blog post generation"
+          git commit -m "Automated blog post generation and homepage update"
           git push
