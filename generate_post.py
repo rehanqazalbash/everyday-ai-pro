@@ -4,7 +4,7 @@ import openai
 openai.api_key = 'YOUR_OPENAI_API_KEY'
 
 def generate_blog_post():
-    response = openai.chat_completions.create(
+    response = openai.ChatCompletion.create(
         model="gpt-3.5-turbo",  # Or use "gpt-4" if you have access
         messages=[
             {"role": "system", "content": "You are a helpful assistant."},
