@@ -1,14 +1,18 @@
 import openai
 
+# Set your OpenAI API key
 openai.api_key = 'YOUR_OPENAI_API_KEY'
 
 def generate_blog_post():
-    response = openai.Completion.create(
-        engine="text-davinci-003",
-        prompt="Write a detailed blog post about making money online using AI tools, including affiliate links for Jasper AI, Copy.ai, and Writesonic.",
+    response = openai.chat_completions.create(
+        model="gpt-3.5-turbo",  # Or use "gpt-4" if you have access
+        messages=[
+            {"role": "system", "content": "You are a helpful assistant."},
+            {"role": "user", "content": "Write a detailed blog post about making money online using AI tools, including affiliate links for Jasper AI, Copy.ai, and Writesonic."}
+        ],
         max_tokens=1500
     )
-    return response.choices[0].text.strip()
+    return response['choices'][0]['message']['content'].strip()
 
 blog_post = generate_blog_post()
 
