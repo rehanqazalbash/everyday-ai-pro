@@ -1,7 +1,8 @@
 import openai
+import os
 
-# Set your OpenAI API key
-openai.api_key = 'YOUR_OPENAI_API_KEY'
+# Get the OpenAI API key from environment variables
+openai.api_key = os.getenv('OPENAI_API_KEY')
 
 def generate_blog_post():
     # Using the new API method (v1.0.0+)
@@ -12,7 +13,6 @@ def generate_blog_post():
     )
     return response['choices'][0]['text'].strip()
 
-# Generate the blog post
 blog_post = generate_blog_post()
 
 # Save the generated blog post to an HTML file
