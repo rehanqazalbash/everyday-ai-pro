@@ -23,6 +23,9 @@ jobs:
           pip install --upgrade pip
           pip install openai
 
+      - name: Set OpenAI API key
+        run: echo "OPENAI_API_KEY=${{ secrets.OPENAI_API_KEY }}" >> $GITHUB_ENV
+
       - name: Generate blog post using GPT-3
         run: |
           python generate_post.py
