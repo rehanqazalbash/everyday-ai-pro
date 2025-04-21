@@ -1,0 +1,35 @@
+name: Auto Blog Post Generation
+
+on:
+  schedule:
+    - cron: "0 0 * * 0"  # Every Sunday at midnight
+  workflow_dispatch:
+
+jobs:
+  generate_and_deploy_post:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.8'
+
+      - name: Install dependencies
+        run: |
+          pip install openai
+
+      - name: Generate blog post using GPT-3
+        run: |
+          python generate_post.py
+
+      - name: Commit new blog post
+        run: |
+          git config --global user.name "GitHub Actions"
+          git config --global user.email "actions@github.com"
+          git add .
+          git commit -m "Automated blog post generation"
+          git push
